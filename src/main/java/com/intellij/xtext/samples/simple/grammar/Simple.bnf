@@ -1,0 +1,212 @@
+{
+    tokens = [
+
+        BRACKET = 'regexp:[{}\[\]<>]'
+
+
+
+        ID =  'regexp:^?[a-zA-Z$_][a-zA-Z0-9$_]*'
+        INT=  'regexp:[0-9]+'
+
+        OPERATORS = 'regexp:[+\-*/]'
+        HEX = 'regexp:(0x|0X) (0-9|a-f|A-F|_)+ (# ((b|B) (i|I) | (l|L)))?'
+        STRING = "regexp:(\"([^\"\\]|\\.)*\"|'([^'\\]|\\.)*')"
+        ML_COMMENT = 'regexp:\/\*(?s).*\*\/'
+        SL_COMMENT = 'regexp: //.*'
+        SEP = 'regexp::'
+        WHITE_SPACE = 'regexp:\s+'
+        DOT = 'regexp:\.'
+        COMMA = 'regexp:,'
+
+        kw_property = 'property'
+        kw_property2= 'property2'
+        package = 'package'
+        kw_entity = 'entity'
+        kw_entity2 = 'entity2'
+        extends = 'extends'
+        kw_test = 'test'
+
+    ]
+
+
+
+
+
+  parserClass="com.intellij.xtext.samples.simple.parser.SimpleParser"
+
+  extends="com.intellij.xtext.samples.simple.psi.impl.SimplePsiCompositeElementImpl"
+  psiClassPrefix="Simple"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.intellij.xtext.samples.simple.psi"
+  psiImplPackage="com.intellij.xtext.samples.simple.impl"
+
+  elementTypeHolderClass="com.intellij.xtext.samples.simple.psi.SimpleTypes"
+  elementTypeClass="com.intellij.xtext.samples.simple.psi.SimpleElementType"
+  tokenTypeClass="com.intellij.xtext.samples.simple.psi.SimpleTokenType"
+
+  psiImplUtilClass="com.intellij.xtext.samples.simple.psi.impl.SimplePsiImplUtil"
+
+  parserUtilClass="com.intellij.xtext.samples.simple.psi.impl.SimpleGeneratedParserUtilBase"
+  generateTokenAccessors=true
+  generateTokens=true
+}
+
+simpleFile ::= AbstractElement*
+{
+    methods=[importSection="XImportSection"
+             elements="AbstractElement"]
+}
+
+private AbstractElement::=
+     Entity | Entity2| Property| Property2 | Test
+
+//PackageDeclaration::=
+//    'package' QualifiedName '{'
+//        AbstractElement*
+//    '}'
+//{
+//    methods=[Xname="QualifiedName"
+//             elements="AbstractElement"]
+//}
+
+
+Entity ::='entity'  ValidID  (('extends'|'extends2') REFERENCE_TO_JvmType_ValidID  )? "{"
+    Feature*
+    "}"
+{
+
+    pin=1
+    mixin="com.intellij.xtext.samples.simple.psi.impl.SimpleNamedElementImpl"
+    implements="com.intellij.xtext.samples.simple.psi.SimpleNamedElement"
+    methods=[ getName setName getNameIdentifier ]
+}
+Entity2 ::='entity2'  ValidID  ('extends' REFERENCE_TO_JvmType_ValidID  )? "{"
+    Feature*
+    "}"
+{
+
+    pin=1
+    mixin="com.intellij.xtext.samples.simple.psi.impl.SimpleNamedElementImpl"
+    implements="com.intellij.xtext.samples.simple.psi.SimpleNamedElement"
+    methods=[getName setName getNameIdentifier ]
+}
+
+private Feature ::= Property | Property2
+
+
+Property::=
+    "property" ValidID ':' REFERENCE_TO_JvmType_ValidID
+{
+    pin=1
+    methods=[type="JvmTypeReference"]
+
+}
+
+Property2::=
+    "property2" ValidID ':' REFERENCE_TO_JvmType_ValidID
+{
+    pin=1
+    methods=[type="JvmTypeReference"]
+
+}
+
+Test::='test' ValidID
+ValidID ::= ID
+
+//                             REFERENCE SECTION
+
+
+REFERENCE_TO_JvmType_ValidID::=ValidID
+
+
+
+
+
+//                              IMPORTING XTYPE
+//JvmTypeReference::=
+//	JvmParameterizedTypeReference ( ArrayBrackets)*
+//	| XFunctionTypeRef
+//
+//ArrayBrackets::=
+//	'[' ']'
+//
+//
+//XFunctionTypeRef::=
+//	('(' (JvmTypeReference (',' JvmTypeReference)*)? ')')? '=>' JvmTypeReference
+//{
+//    methods=[paramTypes="JvmTypeReference"]
+//}
+//
+//
+//JvmParameterizedTypeReference::=
+//	REFERENCE_TO_JvmType_QualifiedName (
+//		'<' JvmArgumentTypeReference (',' JvmArgumentTypeReference)* '>'
+//		('.' REFERENCE_TO_JvmType_ValidID ('<' JvmArgumentTypeReference (',' JvmArgumentTypeReference)* '>')?)*
+//	)?
+//
+//JvmArgumentTypeReference::=
+//	JvmTypeReference | JvmWildcardTypeReference
+//
+//JvmWildcardTypeReference::=
+//                         '?' (
+//                          JvmUpperBound (JvmUpperBoundAnded)*
+//                        | JvmLowerBound (JvmLowerBoundAnded)*
+//                        )?
+//{
+//    methods=[constraints="JvmUpperBound"
+//            ]
+//}
+//
+//JvmUpperBound::=
+//	'extends' JvmTypeReference
+//{
+//    methods=[typeReference="JvmTypeReference"]
+//}
+//
+//JvmUpperBoundAnded::=
+//	'&' JvmTypeReference
+//{
+//    	    methods=[typeReference="JvmTypeReference"]
+//}
+//
+//JvmLowerBound::=
+//	'super' JvmTypeReference
+//{
+//	    methods=[typeReference="JvmTypeReference"]
+//}
+//
+//JvmLowerBoundAnded::=
+//	'&' JvmTypeReference
+//{
+//	    methods=[typeReference="JvmTypeReference"]
+//}
+//
+//JvmTypeParameter::= ValidID (JvmUpperBound (JvmUpperBoundAnded)*)?
+//{
+//    methods=[constraints="JvmUpperBound"
+//             ]
+//}
+//
+//QualifiedName::= ValidID ("."ValidID)*
+//
+//QualifiedNameWithWildcard::=  QualifiedName ".*"
+//
+//ValidID::=ID
+//
+//XImportSection::= XImportDeclaration+
+//                {
+//                methods=[importDeclarations="XImportDeclaration"]
+//                }
+//
+//
+//XImportDeclaration::= "import" (
+//                    ("static" ("extension")? REFERENCE_TO_JvmDeclaredType_QualifiedNameInStaticImport ("*" | ValidID))
+//                     | REFERENCE_TO_JvmDeclaredType_QualifiedName
+//                     | QualifiedNameWithWildcard) ';'?
+// {
+//        pin=1
+//        methods=[importedType="REFERENCE_TO_JvmDeclaredType_QualifiedNameInStaticImport"
+//        importedNamespace="QualifiedNameWithWildcard"]
+// }
+//QualifiedNameInStaticImport::= (ValidID "." )+
+//
