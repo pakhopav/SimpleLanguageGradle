@@ -2,9 +2,9 @@ package com.intellij.docker.composeFile;
 
 import com.intellij.testFramework.TestDataPath;
 
-@TestDataPath("$CONTENT_ROOT/testData/composeFile/completion/keys")
-public class SimpleLanguageComposeFieldsCompletionTest extends SimpleLanguageComposeCompletionTestBase {
-  public SimpleLanguageComposeFieldsCompletionTest() {
+@TestDataPath("$CONTENT_ROOT/testData/completion/keys")
+public class SimpleLanguageCompletionTest extends SimpleLanguageCompletionTestBase {
+  public SimpleLanguageCompletionTest() {
     super("/completion/keys");
   }
 

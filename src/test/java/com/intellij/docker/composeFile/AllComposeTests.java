@@ -11,7 +11,7 @@ public class AllComposeTests {
 
   public static Test suite() {
     TestSuite result = new TestSuite();
-    result.addTestSuite(SimpleLanguageComposeFieldsCompletionTest.class);
+    result.addTestSuite(SimpleLanguageCompletionTest.class);
     return result;
   }
 

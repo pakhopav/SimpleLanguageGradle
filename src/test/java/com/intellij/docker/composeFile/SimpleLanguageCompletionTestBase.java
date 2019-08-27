@@ -5,11 +5,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-abstract class SimpleLanguageComposeCompletionTestBase extends LightPlatformCodeInsightFixtureTestCase {
+abstract class SimpleLanguageCompletionTestBase extends LightPlatformCodeInsightFixtureTestCase {
 
   private final String myDataFolder;
 
-  SimpleLanguageComposeCompletionTestBase(@NotNull String dataFolder) {
+  SimpleLanguageCompletionTestBase(@NotNull String dataFolder) {
     myDataFolder = dataFolder;
   }
 
