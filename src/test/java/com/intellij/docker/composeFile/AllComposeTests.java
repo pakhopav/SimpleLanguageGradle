@@ -7,7 +7,7 @@ import junit.framework.TestSuite;
 import org.jetbrains.annotations.NotNull;
 
 public class AllComposeTests {
-  private static final String TEST_DATA_FOLDER = "testData/composeFile";
+  private static final String TEST_DATA_FOLDER = "testData";
 
   public static Test suite() {
     TestSuite result = new TestSuite();
@@ -23,7 +23,7 @@ public class AllComposeTests {
       if (home == null) {
         throw new IllegalStateException("Can't find neither resources root nor home path ");
       }
-      resources = PathManagerEx.getHomePath(AllComposeTests.class) + "/plugins/Docker/Docker-compose/testData";
+      resources = PathManagerEx.getHomePath(AllComposeTests.class) + "/testData";
     }
     return resources + "/" + TEST_DATA_FOLDER;
   }

@@ -30,7 +30,8 @@
       <lang.syntaxHighlighterFactory language="Simple" implementationClass="com.intellij.xtext.samples.simple.SimpleSyntaxHighlighterFactory"/>
       <annotator language="Simple" implementationClass="com.intellij.xtext.samples.simple.SimpleAnnotator"/>
 <!--      <psi.referenceContributor implementation="com.intellij.xtext.samples.simple.SimpleReferenceContributor"/>-->
-      <completion.contributor language="Simple" implementationClass="com.intellij.xtext.samples.simple.SimpleCompletionContributor"/>
+      <completion.contributor language="Simple"
+                              implementationClass="com.intellij.xtext.samples.simple.keywords.SimpleCompletionContributor"/>
 
   </extensions>
 

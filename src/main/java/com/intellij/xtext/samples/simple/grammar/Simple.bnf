@@ -46,7 +46,7 @@
 
   psiImplUtilClass="com.intellij.xtext.samples.simple.psi.impl.SimplePsiImplUtil"
 
-  parserUtilClass="com.intellij.xtext.samples.simple.psi.impl.SimpleGeneratedParserUtilBase"
+//  parserUtilClass="com.intellij.xtext.samples.simple.psi.impl.SimpleGeneratedParserUtilBase"
   generateTokenAccessors=true
   generateTokens=true
 }

@@ -3,7 +3,8 @@ package com.intellij.xtext.samples.simple.psi;
 
 import com.intellij.psi.tree.IElementType;
 import com.intellij.xtext.samples.simple.SimpleLanguage;
-import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 public class SimpleTokenType extends IElementType {
     private String MyDebugName;
@@ -15,8 +16,8 @@ public class SimpleTokenType extends IElementType {
     public String getDebugName(){
         return MyDebugName;
     }
-    @Override
-    public String toString() {
-        return "SimpleTokenType." + super.toString();
-    }
+//    @Override
+//    public String toString() {
+//        return "SimpleTokenType." + super.toString();
+//    }
 }
