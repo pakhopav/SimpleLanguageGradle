@@ -17,9 +17,11 @@ public interface SimpleTypes {
   IElementType VALID_ID = new SimpleElementType("VALID_ID");
 
   IElementType BRACKET = new SimpleTokenType("BRACKET");
+    IElementType COLON = new SimpleTokenType(":");
   IElementType COMMA = new SimpleTokenType("COMMA");
   IElementType DOT = new SimpleTokenType("DOT");
   IElementType EXTENDS = new SimpleTokenType("extends");
+    IElementType EXTENDS2 = new SimpleTokenType("extends2");
   IElementType HEX = new SimpleTokenType("HEX");
   IElementType ID = new SimpleTokenType("ID");
   IElementType ID2 = new SimpleTokenType("ID2");
@@ -29,9 +31,11 @@ public interface SimpleTypes {
   IElementType KW_PROPERTY = new SimpleTokenType("property");
   IElementType KW_PROPERTY2 = new SimpleTokenType("property2");
   IElementType KW_TEST = new SimpleTokenType("test");
+    IElementType L_BRACE = new SimpleTokenType("{");
   IElementType ML_COMMENT = new SimpleTokenType("ML_COMMENT");
   IElementType OPERATORS = new SimpleTokenType("OPERATORS");
   IElementType PACKAGE = new SimpleTokenType("package");
+    IElementType R_BRACE = new SimpleTokenType("}");
   IElementType SEP = new SimpleTokenType("SEP");
   IElementType SL_COMMENT = new SimpleTokenType("SL_COMMENT");
   IElementType STRING = new SimpleTokenType("STRING");

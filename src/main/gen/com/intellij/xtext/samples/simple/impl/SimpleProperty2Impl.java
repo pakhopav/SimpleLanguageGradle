@@ -1,16 +1,19 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.xtext.samples.simple.impl;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
-import static com.intellij.xtext.samples.simple.psi.SimpleTypes.*;
+import com.intellij.xtext.samples.simple.psi.SimpleProperty2;
+import com.intellij.xtext.samples.simple.psi.SimpleREFERENCETOJvmTypeValidID;
+import com.intellij.xtext.samples.simple.psi.SimpleValidID;
+import com.intellij.xtext.samples.simple.psi.SimpleVisitor;
 import com.intellij.xtext.samples.simple.psi.impl.SimplePsiCompositeElementImpl;
-import com.intellij.xtext.samples.simple.psi.*;
-import com.intellij.xtext.samples.simple.psi.impl.SimplePsiImplUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import static com.intellij.xtext.samples.simple.psi.SimpleTypes.COLON;
+import static com.intellij.xtext.samples.simple.psi.SimpleTypes.KW_PROPERTY2;
 
 public class SimpleProperty2Impl extends SimplePsiCompositeElementImpl implements SimpleProperty2 {
 
@@ -38,6 +41,12 @@ public class SimpleProperty2Impl extends SimplePsiCompositeElementImpl implement
   public SimpleValidID getValidID() {
     return findChildByClass(SimpleValidID.class);
   }
+
+    @Override
+    @Nullable
+    public PsiElement getColon() {
+        return findChildByType(COLON);
+    }
 
   @Override
   @NotNull

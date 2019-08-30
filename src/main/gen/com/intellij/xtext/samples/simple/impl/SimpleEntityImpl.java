@@ -1,16 +1,19 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.xtext.samples.simple.impl;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
-import static com.intellij.xtext.samples.simple.psi.SimpleTypes.*;
-import com.intellij.xtext.samples.simple.psi.impl.SimpleNamedElementImpl;
 import com.intellij.xtext.samples.simple.psi.*;
+import com.intellij.xtext.samples.simple.psi.impl.SimpleNamedElementImpl;
 import com.intellij.xtext.samples.simple.psi.impl.SimplePsiImplUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+
+import static com.intellij.xtext.samples.simple.psi.SimpleTypes.*;
 
 public class SimpleEntityImpl extends SimpleNamedElementImpl implements SimpleEntity {
 
@@ -57,11 +60,29 @@ public class SimpleEntityImpl extends SimpleNamedElementImpl implements SimpleEn
     return findChildByType(EXTENDS);
   }
 
+    @Override
+    @Nullable
+    public PsiElement getExtends2() {
+        return findChildByType(EXTENDS2);
+    }
+
   @Override
   @NotNull
   public PsiElement getKwEntity() {
     return findNotNullChildByType(KW_ENTITY);
   }
+
+    @Override
+    @Nullable
+    public PsiElement getLBrace() {
+        return findChildByType(L_BRACE);
+    }
+
+    @Override
+    @Nullable
+    public PsiElement getRBrace() {
+        return findChildByType(R_BRACE);
+    }
 
   @Override
   public String getName() {

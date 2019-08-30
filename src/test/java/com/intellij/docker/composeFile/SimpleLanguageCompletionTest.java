@@ -52,4 +52,15 @@ public class SimpleLanguageCompletionTest extends SimpleLanguageCompletionTestBa
         checkDoesnotContain("entity", "entity2", "property", "property2", "test");
 
     }
+
+    public void testAfterEntityId() {
+        checkHasCompletions("extends", "extends2");
+        checkDoesnotContain("entity", "entity2", "property", "property2", "test");
+
+    }
+
+    public void testAfterPropertyId() {
+        checkEmptyResolve();
+
+    }
 }

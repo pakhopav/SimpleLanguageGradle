@@ -18,12 +18,17 @@
         DOT = 'regexp:\.'
         COMMA = 'regexp:,'
 
+
+        colon = ':'
+        l_brace = '{'
+        r_brace = '}'
         kw_property = 'property'
         kw_property2= 'property2'
         package = 'package'
         kw_entity = 'entity'
         kw_entity2 = 'entity2'
         extends = 'extends'
+        extends2 = 'extends2'
         kw_test = 'test'
 
     ]

@@ -1,9 +1,11 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.xtext.samples.simple.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public interface SimpleEntity extends SimpleNamedElement {
 
@@ -22,8 +24,17 @@ public interface SimpleEntity extends SimpleNamedElement {
   @Nullable
   PsiElement getExtends();
 
+    @Nullable
+    PsiElement getExtends2();
+
   @NotNull
   PsiElement getKwEntity();
+
+    @Nullable
+    PsiElement getLBrace();
+
+    @Nullable
+    PsiElement getRBrace();
 
   String getName();
 

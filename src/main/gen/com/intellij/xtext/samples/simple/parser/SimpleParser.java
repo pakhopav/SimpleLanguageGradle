@@ -61,9 +61,9 @@ public class SimpleParser implements PsiParser, LightPsiParser {
     p = r; // pin = 1
     r = r && report_error_(b, ValidID(b, l + 1));
     r = p && report_error_(b, Entity_2(b, l + 1)) && r;
-    r = p && report_error_(b, consumeToken(b, "{")) && r;
+    r = p && report_error_(b, consumeToken(b, L_BRACE)) && r;
     r = p && report_error_(b, Entity_4(b, l + 1)) && r;
-    r = p && consumeToken(b, "}") && r;
+    r = p && consumeToken(b, R_BRACE) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -92,7 +92,7 @@ public class SimpleParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, EXTENDS);
-    if (!r) r = consumeToken(b, "extends2");
+    if (!r) r = consumeToken(b, EXTENDS2);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -121,9 +121,9 @@ public class SimpleParser implements PsiParser, LightPsiParser {
     p = r; // pin = 1
     r = r && report_error_(b, ValidID(b, l + 1));
     r = p && report_error_(b, Entity2_2(b, l + 1)) && r;
-    r = p && report_error_(b, consumeToken(b, "{")) && r;
+    r = p && report_error_(b, consumeToken(b, L_BRACE)) && r;
     r = p && report_error_(b, Entity2_4(b, l + 1)) && r;
-    r = p && consumeToken(b, "}") && r;
+    r = p && consumeToken(b, R_BRACE) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
   }
@@ -178,7 +178,7 @@ public class SimpleParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, KW_PROPERTY);
     p = r; // pin = 1
     r = r && report_error_(b, ValidID(b, l + 1));
-    r = p && report_error_(b, consumeToken(b, ":")) && r;
+    r = p && report_error_(b, consumeToken(b, COLON)) && r;
     r = p && REFERENCE_TO_JvmType_ValidID(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;
@@ -194,7 +194,7 @@ public class SimpleParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, KW_PROPERTY2);
     p = r; // pin = 1
     r = r && report_error_(b, ValidID(b, l + 1));
-    r = p && report_error_(b, consumeToken(b, ":")) && r;
+    r = p && report_error_(b, consumeToken(b, COLON)) && r;
     r = p && REFERENCE_TO_JvmType_ValidID(b, l + 1) && r;
     exit_section_(b, l, m, r, p, null);
     return r || p;

@@ -23,19 +23,20 @@ public _SimpleLexer(){
 %}
 
 ID=\^?[a-zA-Z$_][a-zA-Z0-9$_]*
-BRACKET=[{}\[\]<>]
 STRING = (\"([^\"\\]|\\.)*\"|'([^'\\]|\\.)*')
 DOT=\.
 COMMA= ,
 INT=[0-9]+
 OPERATORS = [+\-*/]
-SEPARATOR = :
 WHITE_SPACE=[ \t\n\x0B\f\r]+
 END_OF_LINE_COMMENT=("#"|"!")[^\r\n]*
 
 
 %%
 <YYINITIAL> {
+":" {return COLON;}
+"{" {return L_BRACE;}
+"}" {return R_BRACE;}
 "test" {return KW_TEST;}
 "property" {return KW_PROPERTY;}
 "property2" {return KW_PROPERTY2;}
@@ -43,12 +44,12 @@ END_OF_LINE_COMMENT=("#"|"!")[^\r\n]*
 "entity2" {return KW_ENTITY2;}
 "pakage" {return PACKAGE;}
 "extends" {return EXTENDS;}
+"extends" {return EXTENDS2;}
+
 {ID} {return ID; }
 {STRING} {return STRING;}
 {OPERATORS} {return OPERATORS;}
 {INT} {return INT;}
-{BRACKET} {return BRACKET;}
-{SEPARATOR} {return SEP;}
 {WHITE_SPACE} { return WHITE_SPACE;}
 {END_OF_LINE_COMMENT} {return SL_COMMENT;}
 {DOT} {return DOT;}
