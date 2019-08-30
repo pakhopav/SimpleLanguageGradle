@@ -204,11 +204,11 @@ public class SimpleParser implements PsiParser, LightPsiParser {
   // ValidID
   public static boolean REFERENCE_TO_JvmType_ValidID(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "REFERENCE_TO_JvmType_ValidID")) return false;
-    if (!nextTokenIs(b, ID)) return false;
+    if (!nextTokenIs(b, "<reference to jvm type valid id>", ID, ID2)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, REFERENCE_TO_JVM_TYPE_VALID_ID, "<reference to jvm type valid id>");
     r = ValidID(b, l + 1);
-    exit_section_(b, m, REFERENCE_TO_JVM_TYPE_VALID_ID, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -226,14 +226,15 @@ public class SimpleParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ID
+  // ID | ID2
   public static boolean ValidID(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ValidID")) return false;
-    if (!nextTokenIs(b, ID)) return false;
+    if (!nextTokenIs(b, "<valid id>", ID, ID2)) return false;
     boolean r;
-    Marker m = enter_section_(b);
+    Marker m = enter_section_(b, l, _NONE_, VALID_ID, "<valid id>");
     r = consumeToken(b, ID);
-    exit_section_(b, m, VALID_ID, r);
+    if (!r) r = consumeToken(b, ID2);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 

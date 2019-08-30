@@ -111,7 +111,7 @@ Property2::=
 }
 
 Test::='test' ValidID
-ValidID ::= ID
+ValidID ::= ID | ID2
 
 //                             REFERENCE SECTION
 

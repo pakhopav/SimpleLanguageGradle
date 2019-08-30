@@ -1,9 +1,9 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.xtext.samples.simple.psi;
 
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.PsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.xtext.samples.simple.impl.*;
 
 public interface SimpleTypes {
@@ -22,6 +22,7 @@ public interface SimpleTypes {
   IElementType EXTENDS = new SimpleTokenType("extends");
   IElementType HEX = new SimpleTokenType("HEX");
   IElementType ID = new SimpleTokenType("ID");
+  IElementType ID2 = new SimpleTokenType("ID2");
   IElementType INT = new SimpleTokenType("INT");
   IElementType KW_ENTITY = new SimpleTokenType("entity");
   IElementType KW_ENTITY2 = new SimpleTokenType("entity2");

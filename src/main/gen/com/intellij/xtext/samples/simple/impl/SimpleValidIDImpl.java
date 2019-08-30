@@ -1,16 +1,17 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.xtext.samples.simple.impl;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
-import static com.intellij.xtext.samples.simple.psi.SimpleTypes.*;
+import com.intellij.xtext.samples.simple.psi.SimpleValidID;
+import com.intellij.xtext.samples.simple.psi.SimpleVisitor;
 import com.intellij.xtext.samples.simple.psi.impl.SimplePsiCompositeElementImpl;
-import com.intellij.xtext.samples.simple.psi.*;
-import com.intellij.xtext.samples.simple.psi.impl.SimplePsiImplUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import static com.intellij.xtext.samples.simple.psi.SimpleTypes.ID;
+import static com.intellij.xtext.samples.simple.psi.SimpleTypes.ID2;
 
 public class SimpleValidIDImpl extends SimplePsiCompositeElementImpl implements SimpleValidID {
 
@@ -28,9 +29,15 @@ public class SimpleValidIDImpl extends SimplePsiCompositeElementImpl implements 
   }
 
   @Override
-  @NotNull
+  @Nullable
   public PsiElement getId() {
-    return findNotNullChildByType(ID);
+    return findChildByType(ID);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getId2() {
+    return findChildByType(ID2);
   }
 
 }
