@@ -51,7 +51,7 @@ class KeywordCompletionProvider<T extends PsiFile, F extends IElementType> exten
             @Override
             public boolean prefixMatches(@NotNull PsiBuilder builder, @NotNull String text) {
                 if (!errorOccured) {
-                    if (GeneratedParserUtilBase.ErrorState.get(builder).currentFrame.errorReportedAt != -1) {
+                    if (checkError(GeneratedParserUtilBase.ErrorState.get(builder).currentFrame)) {
                         errorOccured = true;
                         return false;
                     }
@@ -60,6 +60,14 @@ class KeywordCompletionProvider<T extends PsiFile, F extends IElementType> exten
                     }
 
 
+                }
+                return false;
+            }
+
+            public boolean checkError(GeneratedParserUtilBase.Frame frame) {
+                while (frame != null) {
+                    if (frame.errorReportedAt != -1) return true;
+                    frame = frame.parentFrame;
                 }
                 return false;
             }
