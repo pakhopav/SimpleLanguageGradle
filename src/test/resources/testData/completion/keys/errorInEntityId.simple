@@ -1,0 +1,7 @@
+entity 2 extends <caret> b {
+property prop : a
+}
+test b
+test r
+property proper : v
+entity l {}

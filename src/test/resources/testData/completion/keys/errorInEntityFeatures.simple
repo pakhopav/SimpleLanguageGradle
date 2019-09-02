@@ -1,0 +1,4 @@
+entity ent extends G {
+    property a a
+    <caret>
+}

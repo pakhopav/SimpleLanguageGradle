@@ -65,8 +65,49 @@ public class SimpleLanguageCompletionTest extends SimpleLanguageCompletionTestBa
 
     }
 
-    public void testAfterPropertyId() {
+    public void testErrorInEntityExtendsBlock() {
         checkEmptyResolve();
 
     }
+
+    public void testErrorInEntityExtendsBlockRecover() {
+        checkHasCompletions("ID", "ID2");
+        checkDoesnotContain("entity", "entity2", "property", "property2", "test");
+
+    }
+
+    public void testErrorInEntityFeatures() {
+        checkEmptyResolve();
+
+    }
+
+    public void testErrorInEntityFeaturesRecover() {
+        checkHasCompletions("entity", "entity2", "property", "property2", "test");
+        checkDoesnotContain("ID", "ID2", "extends", "extends2");
+
+    }
+
+    public void testErrorInEntityId() {
+        checkEmptyResolve();
+
+    }
+
+    public void testErrorInEntityIdRecover() {
+        checkHasCompletions("entity", "entity2", "property", "property2", "test");
+        checkDoesnotContain("ID", "ID2", "extends", "extends2");
+
+    }
+
+    public void testErrorInEntityIdEmpty() {
+        checkEmptyResolve();
+
+    }
+
+    public void testErrorInEntityIdEmptyRecover() {
+        checkHasCompletions("entity", "entity2", "property", "property2", "test");
+        checkDoesnotContain("ID", "ID2", "extends", "extends2");
+
+    }
+
+
 }
