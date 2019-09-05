@@ -1,16 +1,19 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.xtext.samples.simple.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface SimpleTest extends PsiElement {
 
-  @NotNull
+    @Nullable
   SimpleValidID getValidID();
 
   @NotNull
   PsiElement getKwTest();
+
+    @NotNull
+    PsiElement getSemicolon();
 
 }

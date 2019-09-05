@@ -6,8 +6,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.xtext.samples.simple.psi.*;
-import com.intellij.xtext.samples.simple.psi.impl.SimpleNamedElementImpl;
-import com.intellij.xtext.samples.simple.psi.impl.SimplePsiImplUtil;
+import com.intellij.xtext.samples.simple.psi.impl.SimplePsiCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +14,7 @@ import java.util.List;
 
 import static com.intellij.xtext.samples.simple.psi.SimpleTypes.*;
 
-public class SimpleEntityImpl extends SimpleNamedElementImpl implements SimpleEntity {
+public class SimpleEntityImpl extends SimplePsiCompositeElementImpl implements SimpleEntity {
 
   public SimpleEntityImpl(@NotNull ASTNode node) {
     super(node);
@@ -32,14 +31,26 @@ public class SimpleEntityImpl extends SimpleNamedElementImpl implements SimpleEn
 
   @Override
   @NotNull
-  public List<SimpleProperty> getPropertyList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, SimpleProperty.class);
+  public List<SimpleEntity> getEntityList() {
+      return PsiTreeUtil.getChildrenOfTypeAsList(this, SimpleEntity.class);
+  }
+
+    @Override
+    @NotNull
+    public List<SimpleEntity2> getEntity2List() {
+        return PsiTreeUtil.getChildrenOfTypeAsList(this, SimpleEntity2.class);
   }
 
   @Override
   @NotNull
-  public List<SimpleProperty2> getProperty2List() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, SimpleProperty2.class);
+  public List<SimpleProp> getPropList() {
+      return PsiTreeUtil.getChildrenOfTypeAsList(this, SimpleProp.class);
+  }
+
+    @Override
+    @NotNull
+    public List<SimpleProp2> getProp2List() {
+        return PsiTreeUtil.getChildrenOfTypeAsList(this, SimpleProp2.class);
   }
 
   @Override
@@ -79,24 +90,9 @@ public class SimpleEntityImpl extends SimpleNamedElementImpl implements SimpleEn
     }
 
     @Override
-    @Nullable
+    @NotNull
     public PsiElement getRBrace() {
-        return findChildByType(R_BRACE);
-    }
-
-  @Override
-  public String getName() {
-    return SimplePsiImplUtil.getName(this);
-  }
-
-  @Override
-  public PsiElement setName(String newName) {
-    return SimplePsiImplUtil.setName(this, newName);
-  }
-
-  @Override
-  public PsiElement getNameIdentifier() {
-    return SimplePsiImplUtil.getNameIdentifier(this);
+        return findNotNullChildByType(R_BRACE);
   }
 
 }

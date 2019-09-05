@@ -4,7 +4,7 @@ package com.intellij.xtext.samples.simple.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.xtext.samples.simple.psi.SimpleProperty;
+import com.intellij.xtext.samples.simple.psi.SimpleProp;
 import com.intellij.xtext.samples.simple.psi.SimpleREFERENCETOJvmTypeValidID;
 import com.intellij.xtext.samples.simple.psi.SimpleValidID;
 import com.intellij.xtext.samples.simple.psi.SimpleVisitor;
@@ -12,17 +12,16 @@ import com.intellij.xtext.samples.simple.psi.impl.SimplePsiCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.intellij.xtext.samples.simple.psi.SimpleTypes.COLON;
-import static com.intellij.xtext.samples.simple.psi.SimpleTypes.KW_PROPERTY;
+import static com.intellij.xtext.samples.simple.psi.SimpleTypes.*;
 
-public class SimplePropertyImpl extends SimplePsiCompositeElementImpl implements SimpleProperty {
+public class SimplePropImpl extends SimplePsiCompositeElementImpl implements SimpleProp {
 
-  public SimplePropertyImpl(@NotNull ASTNode node) {
+    public SimplePropImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull SimpleVisitor visitor) {
-    visitor.visitProperty(this);
+      visitor.visitProp(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -50,8 +49,14 @@ public class SimplePropertyImpl extends SimplePsiCompositeElementImpl implements
 
   @Override
   @NotNull
-  public PsiElement getKwProperty() {
-    return findNotNullChildByType(KW_PROPERTY);
+  public PsiElement getProperty() {
+      return findNotNullChildByType(PROPERTY);
+  }
+
+    @Override
+    @NotNull
+    public PsiElement getSemicolon() {
+        return findNotNullChildByType(SEMICOLON);
   }
 
 }

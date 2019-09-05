@@ -8,10 +8,12 @@ import com.intellij.xtext.samples.simple.impl.*;
 
 public interface SimpleTypes {
 
+    IElementType ABSTRACT_ENTITY_RECOVER = new SimpleElementType("ABSTRACT_ENTITY_RECOVER");
+    IElementType ABSTRACT_PROPERTY_RECOVER = new SimpleElementType("ABSTRACT_PROPERTY_RECOVER");
   IElementType ENTITY = new SimpleElementType("ENTITY");
   IElementType ENTITY_2 = new SimpleElementType("ENTITY_2");
-  IElementType PROPERTY = new SimpleElementType("PROPERTY");
-  IElementType PROPERTY_2 = new SimpleElementType("PROPERTY_2");
+    IElementType PROP = new SimpleElementType("PROP");
+    IElementType PROP_2 = new SimpleElementType("PROP_2");
   IElementType REFERENCE_TO_JVM_TYPE_VALID_ID = new SimpleElementType("REFERENCE_TO_JVM_TYPE_VALID_ID");
   IElementType TEST = new SimpleElementType("TEST");
   IElementType VALID_ID = new SimpleElementType("VALID_ID");
@@ -28,14 +30,15 @@ public interface SimpleTypes {
   IElementType INT = new SimpleTokenType("INT");
   IElementType KW_ENTITY = new SimpleTokenType("entity");
   IElementType KW_ENTITY2 = new SimpleTokenType("entity2");
-  IElementType KW_PROPERTY = new SimpleTokenType("property");
-  IElementType KW_PROPERTY2 = new SimpleTokenType("property2");
   IElementType KW_TEST = new SimpleTokenType("test");
     IElementType L_BRACE = new SimpleTokenType("{");
   IElementType ML_COMMENT = new SimpleTokenType("ML_COMMENT");
   IElementType OPERATORS = new SimpleTokenType("OPERATORS");
   IElementType PACKAGE = new SimpleTokenType("package");
+    IElementType PROPERTY = new SimpleTokenType("property");
+    IElementType PROPERTY2 = new SimpleTokenType("property2");
     IElementType R_BRACE = new SimpleTokenType("}");
+    IElementType SEMICOLON = new SimpleTokenType(";");
   IElementType SEP = new SimpleTokenType("SEP");
   IElementType SL_COMMENT = new SimpleTokenType("SL_COMMENT");
   IElementType STRING = new SimpleTokenType("STRING");
@@ -43,17 +46,19 @@ public interface SimpleTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-      if (type == ENTITY) {
+        if (type == ABSTRACT_ENTITY_RECOVER) {
+            return new SimpleAbstractEntityRecoverImpl(node);
+        } else if (type == ABSTRACT_PROPERTY_RECOVER) {
+            return new SimpleAbstractPropertyRecoverImpl(node);
+        } else if (type == ENTITY) {
         return new SimpleEntityImpl(node);
       }
       else if (type == ENTITY_2) {
         return new SimpleEntity2Impl(node);
-      }
-      else if (type == PROPERTY) {
-        return new SimplePropertyImpl(node);
-      }
-      else if (type == PROPERTY_2) {
-        return new SimpleProperty2Impl(node);
+      } else if (type == PROP) {
+            return new SimplePropImpl(node);
+      } else if (type == PROP_2) {
+            return new SimpleProp2Impl(node);
       }
       else if (type == REFERENCE_TO_JVM_TYPE_VALID_ID) {
         return new SimpleREFERENCETOJvmTypeValidIDImpl(node);

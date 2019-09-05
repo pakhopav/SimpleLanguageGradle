@@ -1,16 +1,18 @@
 // This is a generated file. Not intended for manual editing.
 package com.intellij.xtext.samples.simple.impl;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
-import static com.intellij.xtext.samples.simple.psi.SimpleTypes.*;
+import com.intellij.xtext.samples.simple.psi.SimpleTest;
+import com.intellij.xtext.samples.simple.psi.SimpleValidID;
+import com.intellij.xtext.samples.simple.psi.SimpleVisitor;
 import com.intellij.xtext.samples.simple.psi.impl.SimplePsiCompositeElementImpl;
-import com.intellij.xtext.samples.simple.psi.*;
-import com.intellij.xtext.samples.simple.psi.impl.SimplePsiImplUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import static com.intellij.xtext.samples.simple.psi.SimpleTypes.KW_TEST;
+import static com.intellij.xtext.samples.simple.psi.SimpleTypes.SEMICOLON;
 
 public class SimpleTestImpl extends SimplePsiCompositeElementImpl implements SimpleTest {
 
@@ -28,9 +30,9 @@ public class SimpleTestImpl extends SimplePsiCompositeElementImpl implements Sim
   }
 
   @Override
-  @NotNull
+  @Nullable
   public SimpleValidID getValidID() {
-    return findNotNullChildByClass(SimpleValidID.class);
+      return findChildByClass(SimpleValidID.class);
   }
 
   @Override
@@ -38,5 +40,11 @@ public class SimpleTestImpl extends SimplePsiCompositeElementImpl implements Sim
   public PsiElement getKwTest() {
     return findNotNullChildByType(KW_TEST);
   }
+
+    @Override
+    @NotNull
+    public PsiElement getSemicolon() {
+        return findNotNullChildByType(SEMICOLON);
+    }
 
 }

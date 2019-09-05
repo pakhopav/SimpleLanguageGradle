@@ -22,8 +22,9 @@
         colon = ':'
         l_brace = '{'
         r_brace = '}'
-        kw_property = 'property'
-        kw_property2= 'property2'
+        semicolon = ';'
+        property = 'property'
+        property2= 'property2'
         package = 'package'
         kw_entity = 'entity'
         kw_entity2 = 'entity2'
@@ -51,7 +52,7 @@
 
   psiImplUtilClass="com.intellij.xtext.samples.simple.psi.impl.SimplePsiImplUtil"
 
-//  parserUtilClass="com.intellij.xtext.samples.simple.psi.impl.SimpleGeneratedParserUtilBase"
+  parserUtilClass="com.intellij.xtext.samples.simple.psi.impl.simpleParserUtil.GeneratedParserUtilBaseCopy"
   generateTokenAccessors=true
   generateTokens=true
 }
@@ -63,60 +64,64 @@ simpleFile ::= AbstractElement*
 }
 
 private AbstractElement::=
-     Entity | Entity2| Property| Property2 | Test
-
-//PackageDeclaration::=
-//    'package' QualifiedName '{'
-//        AbstractElement*
-//    '}'
-//{
-//    methods=[Xname="QualifiedName"
-//             elements="AbstractElement"]
-//}
+     Entity | Entity2| Prop | Prop2 | Test
 
 
-Entity ::='entity'  ValidID  (('extends'|'extends2') REFERENCE_TO_JvmType_ValidID  )? "{"
-    Feature*
-    "}"
+Entity ::=AbstractEntity '}'
+private AbstractEntity::= 'entity'  ValidID  (('extends'|'extends2') REFERENCE_TO_JvmType_ValidID  )? "{"
+                    Feature*
 {
-
     pin=1
+    recoverWhile = abstract_entity_recover
     mixin="com.intellij.xtext.samples.simple.psi.impl.SimpleNamedElementImpl"
     implements="com.intellij.xtext.samples.simple.psi.SimpleNamedElement"
     methods=[ getName setName getNameIdentifier ]
 }
-Entity2 ::='entity2'  ValidID  ('extends' REFERENCE_TO_JvmType_ValidID  )? "{"
-    Feature*
-    "}"
-{
 
+abstract_entity_recover ::= !('}')
+abstract_property_recover ::= !(';')
+
+Entity2 ::=AbstractEntity2 '}'
+private AbstractEntity2::= 'entity2'  ValidID  (('extends'|'extends2') REFERENCE_TO_JvmType_ValidID  )? "{"
+                    Feature*
+{
     pin=1
+    recoverWhile = abstract_entity_recover
     mixin="com.intellij.xtext.samples.simple.psi.impl.SimpleNamedElementImpl"
     implements="com.intellij.xtext.samples.simple.psi.SimpleNamedElement"
-    methods=[getName setName getNameIdentifier ]
+    methods=[ getName setName getNameIdentifier ]
 }
 
-private Feature ::= Property | Property2
+private Feature ::= Prop | Prop2 | Entity |Entity2
 
-
-Property::=
-    "property" ValidID ':' REFERENCE_TO_JvmType_ValidID
+Prop::= AbstactProperty ';'
+private AbstactProperty::=
+    'property' ValidID ':' REFERENCE_TO_JvmType_ValidID
 {
     pin=1
+    recoverWhile = abstract_property_recover
     methods=[type="JvmTypeReference"]
 
 }
 
-Property2::=
-    "property2" ValidID ':' REFERENCE_TO_JvmType_ValidID
+Prop2::= AbstactProperty2 ';'
+private AbstactProperty2::=
+    'property2' ValidID ':' REFERENCE_TO_JvmType_ValidID
 {
     pin=1
+    recoverWhile = abstract_property_recover
     methods=[type="JvmTypeReference"]
 
 }
-
-Test::='test' ValidID
+Test ::= AbstractTest ';'
+private AbstractTest::='test' ValidID
+{
+    pin =1
+    recoverWhile = abstract_property_recover
+}
 ValidID ::= ID | ID2
+
+
 
 //                             REFERENCE SECTION
 

@@ -7,13 +7,19 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public interface SimpleEntity extends SimpleNamedElement {
+public interface SimpleEntity extends PsiElement {
+
+    @NotNull
+    List<SimpleEntity> getEntityList();
+
+    @NotNull
+    List<SimpleEntity2> getEntity2List();
 
   @NotNull
-  List<SimpleProperty> getPropertyList();
+  List<SimpleProp> getPropList();
 
   @NotNull
-  List<SimpleProperty2> getProperty2List();
+  List<SimpleProp2> getProp2List();
 
   @Nullable
   SimpleREFERENCETOJvmTypeValidID getREFERENCETOJvmTypeValidID();
@@ -33,13 +39,7 @@ public interface SimpleEntity extends SimpleNamedElement {
     @Nullable
     PsiElement getLBrace();
 
-    @Nullable
+    @NotNull
     PsiElement getRBrace();
-
-  String getName();
-
-  PsiElement setName(String newName);
-
-  PsiElement getNameIdentifier();
 
 }

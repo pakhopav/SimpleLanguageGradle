@@ -5,7 +5,7 @@ import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public interface SimpleProperty2 extends PsiElement {
+public interface SimpleProp2 extends PsiElement {
 
   @Nullable
   SimpleREFERENCETOJvmTypeValidID getREFERENCETOJvmTypeValidID();
@@ -17,6 +17,9 @@ public interface SimpleProperty2 extends PsiElement {
     PsiElement getColon();
 
   @NotNull
-  PsiElement getKwProperty2();
+  PsiElement getProperty2();
+
+    @NotNull
+    PsiElement getSemicolon();
 
 }

@@ -37,14 +37,15 @@ END_OF_LINE_COMMENT=("#"|"!")[^\r\n]*
 ":" {return COLON;}
 "{" {return L_BRACE;}
 "}" {return R_BRACE;}
+";" {return SEMICOLON;}
 "test" {return KW_TEST;}
-"property" {return KW_PROPERTY;}
-"property2" {return KW_PROPERTY2;}
+"property" {return PROPERTY;}
+"property2" {return PROPERTY2;}
 "entity" {return KW_ENTITY;}
 "entity2" {return KW_ENTITY2;}
 "pakage" {return PACKAGE;}
 "extends" {return EXTENDS;}
-"extends" {return EXTENDS2;}
+"extends2" {return EXTENDS2;}
 
 {ID} {return ID; }
 {STRING} {return STRING;}

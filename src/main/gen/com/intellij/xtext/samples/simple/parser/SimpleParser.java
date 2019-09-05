@@ -8,8 +8,8 @@ import com.intellij.lang.PsiBuilder.Marker;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
 
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
 import static com.intellij.xtext.samples.simple.psi.SimpleTypes.*;
+import static com.intellij.xtext.samples.simple.psi.impl.simpleParserUtil.GeneratedParserUtilBaseCopy.*;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
 public class SimpleParser implements PsiParser, LightPsiParser {
@@ -35,60 +35,98 @@ public class SimpleParser implements PsiParser, LightPsiParser {
     return simpleFile(b, l + 1);
   }
 
+  static final Parser abstract_entity_recover_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return abstract_entity_recover(b, l + 1);
+    }
+  };
+  static final Parser abstract_property_recover_parser_ = new Parser() {
+    public boolean parse(PsiBuilder b, int l) {
+      return abstract_property_recover(b, l + 1);
+    }
+  };
+
   /* ********************************************************** */
-  // Entity | Entity2| Property| Property2 | Test
+  // 'property' ValidID ':' REFERENCE_TO_JvmType_ValidID
+  static boolean AbstactProperty(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstactProperty")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = consumeToken(b, PROPERTY);
+    p = r; // pin = 1
+    r = r && report_error_(b, ValidID(b, l + 1));
+    r = p && report_error_(b, consumeToken(b, COLON)) && r;
+    r = p && REFERENCE_TO_JvmType_ValidID(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, abstract_property_recover_parser_);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // 'property2' ValidID ':' REFERENCE_TO_JvmType_ValidID
+  static boolean AbstactProperty2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstactProperty2")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = consumeToken(b, PROPERTY2);
+    p = r; // pin = 1
+    r = r && report_error_(b, ValidID(b, l + 1));
+    r = p && report_error_(b, consumeToken(b, COLON)) && r;
+    r = p && REFERENCE_TO_JvmType_ValidID(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, abstract_property_recover_parser_);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // Entity | Entity2| Prop | Prop2 | Test
   static boolean AbstractElement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AbstractElement")) return false;
     boolean r;
     r = Entity(b, l + 1);
     if (!r) r = Entity2(b, l + 1);
-    if (!r) r = Property(b, l + 1);
-    if (!r) r = Property2(b, l + 1);
+    if (!r) r = Prop(b, l + 1);
+    if (!r) r = Prop2(b, l + 1);
     if (!r) r = Test(b, l + 1);
     return r;
   }
 
   /* ********************************************************** */
   // 'entity'  ValidID  (('extends'|'extends2') REFERENCE_TO_JvmType_ValidID  )? "{"
-  //     Feature*
-  //     "}"
-  public static boolean Entity(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Entity")) return false;
-    if (!nextTokenIs(b, KW_ENTITY)) return false;
+  //                     Feature*
+  static boolean AbstractEntity(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstractEntity")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ENTITY, null);
+    Marker m = enter_section_(b, l, _NONE_);
     r = consumeToken(b, KW_ENTITY);
     p = r; // pin = 1
     r = r && report_error_(b, ValidID(b, l + 1));
-    r = p && report_error_(b, Entity_2(b, l + 1)) && r;
+    r = p && report_error_(b, AbstractEntity_2(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, L_BRACE)) && r;
-    r = p && report_error_(b, Entity_4(b, l + 1)) && r;
-    r = p && consumeToken(b, R_BRACE) && r;
-    exit_section_(b, l, m, r, p, null);
+    r = p && AbstractEntity_4(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, abstract_entity_recover_parser_);
     return r || p;
   }
 
   // (('extends'|'extends2') REFERENCE_TO_JvmType_ValidID  )?
-  private static boolean Entity_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Entity_2")) return false;
-    Entity_2_0(b, l + 1);
+  private static boolean AbstractEntity_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstractEntity_2")) return false;
+    AbstractEntity_2_0(b, l + 1);
     return true;
   }
 
   // ('extends'|'extends2') REFERENCE_TO_JvmType_ValidID
-  private static boolean Entity_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Entity_2_0")) return false;
+  private static boolean AbstractEntity_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstractEntity_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = Entity_2_0_0(b, l + 1);
+    r = AbstractEntity_2_0_0(b, l + 1);
     r = r && REFERENCE_TO_JvmType_ValidID(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // 'extends'|'extends2'
-  private static boolean Entity_2_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Entity_2_0_0")) return false;
+  private static boolean AbstractEntity_2_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstractEntity_2_0_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, EXTENDS);
@@ -98,106 +136,122 @@ public class SimpleParser implements PsiParser, LightPsiParser {
   }
 
   // Feature*
-  private static boolean Entity_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Entity_4")) return false;
+  private static boolean AbstractEntity_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstractEntity_4")) return false;
     while (true) {
       int c = current_position_(b);
       if (!Feature(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "Entity_4", c)) break;
+      if (!empty_element_parsed_guard_(b, "AbstractEntity_4", c)) break;
     }
     return true;
   }
 
   /* ********************************************************** */
-  // 'entity2'  ValidID  ('extends' REFERENCE_TO_JvmType_ValidID  )? "{"
-  //     Feature*
-  //     "}"
-  public static boolean Entity2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Entity2")) return false;
-    if (!nextTokenIs(b, KW_ENTITY2)) return false;
+  // 'entity2'  ValidID  (('extends'|'extends2') REFERENCE_TO_JvmType_ValidID  )? "{"
+  //                     Feature*
+  static boolean AbstractEntity2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstractEntity2")) return false;
     boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, ENTITY_2, null);
+    Marker m = enter_section_(b, l, _NONE_);
     r = consumeToken(b, KW_ENTITY2);
     p = r; // pin = 1
     r = r && report_error_(b, ValidID(b, l + 1));
-    r = p && report_error_(b, Entity2_2(b, l + 1)) && r;
+    r = p && report_error_(b, AbstractEntity2_2(b, l + 1)) && r;
     r = p && report_error_(b, consumeToken(b, L_BRACE)) && r;
-    r = p && report_error_(b, Entity2_4(b, l + 1)) && r;
-    r = p && consumeToken(b, R_BRACE) && r;
-    exit_section_(b, l, m, r, p, null);
+    r = p && AbstractEntity2_4(b, l + 1) && r;
+    exit_section_(b, l, m, r, p, abstract_entity_recover_parser_);
     return r || p;
   }
 
-  // ('extends' REFERENCE_TO_JvmType_ValidID  )?
-  private static boolean Entity2_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Entity2_2")) return false;
-    Entity2_2_0(b, l + 1);
+  // (('extends'|'extends2') REFERENCE_TO_JvmType_ValidID  )?
+  private static boolean AbstractEntity2_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstractEntity2_2")) return false;
+    AbstractEntity2_2_0(b, l + 1);
     return true;
   }
 
-  // 'extends' REFERENCE_TO_JvmType_ValidID
-  private static boolean Entity2_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Entity2_2_0")) return false;
+  // ('extends'|'extends2') REFERENCE_TO_JvmType_ValidID
+  private static boolean AbstractEntity2_2_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstractEntity2_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, EXTENDS);
+    r = AbstractEntity2_2_0_0(b, l + 1);
     r = r && REFERENCE_TO_JvmType_ValidID(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
+  // 'extends'|'extends2'
+  private static boolean AbstractEntity2_2_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstractEntity2_2_0_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, EXTENDS);
+    if (!r) r = consumeToken(b, EXTENDS2);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
   // Feature*
-  private static boolean Entity2_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Entity2_4")) return false;
+  private static boolean AbstractEntity2_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstractEntity2_4")) return false;
     while (true) {
       int c = current_position_(b);
       if (!Feature(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "Entity2_4", c)) break;
+      if (!empty_element_parsed_guard_(b, "AbstractEntity2_4", c)) break;
     }
     return true;
   }
 
   /* ********************************************************** */
-  // Property | Property2
-  static boolean Feature(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Feature")) return false;
-    if (!nextTokenIs(b, "", KW_PROPERTY, KW_PROPERTY2)) return false;
+  // 'test' ValidID
+  static boolean AbstractTest(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "AbstractTest")) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_);
+    r = consumeToken(b, KW_TEST);
+    p = r; // pin = 1
+    r = r && ValidID(b, l + 1);
+    exit_section_(b, l, m, r, p, abstract_property_recover_parser_);
+    return r || p;
+  }
+
+  /* ********************************************************** */
+  // AbstractEntity '}'
+  public static boolean Entity(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Entity")) return false;
+    if (!nextTokenIs(b, KW_ENTITY)) return false;
     boolean r;
-    r = Property(b, l + 1);
-    if (!r) r = Property2(b, l + 1);
+    Marker m = enter_section_(b);
+    r = AbstractEntity(b, l + 1);
+    r = r && consumeToken(b, R_BRACE);
+    exit_section_(b, m, ENTITY, r);
     return r;
   }
 
   /* ********************************************************** */
-  // "property" ValidID ':' REFERENCE_TO_JvmType_ValidID
-  public static boolean Property(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Property")) return false;
-    if (!nextTokenIs(b, KW_PROPERTY)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, PROPERTY, null);
-    r = consumeToken(b, KW_PROPERTY);
-    p = r; // pin = 1
-    r = r && report_error_(b, ValidID(b, l + 1));
-    r = p && report_error_(b, consumeToken(b, COLON)) && r;
-    r = p && REFERENCE_TO_JvmType_ValidID(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+  // AbstractEntity2 '}'
+  public static boolean Entity2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Entity2")) return false;
+    if (!nextTokenIs(b, KW_ENTITY2)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = AbstractEntity2(b, l + 1);
+    r = r && consumeToken(b, R_BRACE);
+    exit_section_(b, m, ENTITY_2, r);
+    return r;
   }
 
   /* ********************************************************** */
-  // "property2" ValidID ':' REFERENCE_TO_JvmType_ValidID
-  public static boolean Property2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Property2")) return false;
-    if (!nextTokenIs(b, KW_PROPERTY2)) return false;
-    boolean r, p;
-    Marker m = enter_section_(b, l, _NONE_, PROPERTY_2, null);
-    r = consumeToken(b, KW_PROPERTY2);
-    p = r; // pin = 1
-    r = r && report_error_(b, ValidID(b, l + 1));
-    r = p && report_error_(b, consumeToken(b, COLON)) && r;
-    r = p && REFERENCE_TO_JvmType_ValidID(b, l + 1) && r;
-    exit_section_(b, l, m, r, p, null);
-    return r || p;
+  // Prop | Prop2 | Entity |Entity2
+  static boolean Feature(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Feature")) return false;
+    boolean r;
+    r = Prop(b, l + 1);
+    if (!r) r = Prop2(b, l + 1);
+    if (!r) r = Entity(b, l + 1);
+    if (!r) r = Entity2(b, l + 1);
+    return r;
   }
 
   /* ********************************************************** */
@@ -213,15 +267,15 @@ public class SimpleParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'test' ValidID
-  public static boolean Test(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Test")) return false;
-    if (!nextTokenIs(b, KW_TEST)) return false;
+  // AbstactProperty ';'
+  public static boolean Prop(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Prop")) return false;
+    if (!nextTokenIs(b, PROPERTY)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, KW_TEST);
-    r = r && ValidID(b, l + 1);
-    exit_section_(b, m, TEST, r);
+    r = AbstactProperty(b, l + 1);
+    r = r && consumeToken(b, SEMICOLON);
+    exit_section_(b, m, PROP, r);
     return r;
   }
 
@@ -239,6 +293,32 @@ public class SimpleParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // AbstactProperty2 ';'
+  public static boolean Prop2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Prop2")) return false;
+    if (!nextTokenIs(b, PROPERTY2)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = AbstactProperty2(b, l + 1);
+    r = r && consumeToken(b, SEMICOLON);
+    exit_section_(b, m, PROP_2, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // AbstractTest ';'
+  public static boolean Test(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Test")) return false;
+    if (!nextTokenIs(b, KW_TEST)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = AbstractTest(b, l + 1);
+    r = r && consumeToken(b, SEMICOLON);
+    exit_section_(b, m, TEST, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // AbstractElement*
   static boolean simpleFile(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "simpleFile")) return false;
@@ -250,4 +330,25 @@ public class SimpleParser implements PsiParser, LightPsiParser {
     return true;
   }
 
+  /* ********************************************************** */
+  // !('}')
+  public static boolean abstract_entity_recover(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "abstract_entity_recover")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_, ABSTRACT_ENTITY_RECOVER, "<abstract entity recover>");
+    r = !consumeToken(b, R_BRACE);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // !(';')
+  public static boolean abstract_property_recover(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "abstract_property_recover")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NOT_, ABSTRACT_PROPERTY_RECOVER, "<abstract property recover>");
+    r = !consumeToken(b, SEMICOLON);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
 }

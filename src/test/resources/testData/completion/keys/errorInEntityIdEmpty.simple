@@ -1,1 +1,3 @@
-entity     <caret> extends a {}
+entity      {
+    <caret>
+}
