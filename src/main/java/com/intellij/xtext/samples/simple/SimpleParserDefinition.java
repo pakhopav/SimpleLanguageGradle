@@ -1,14 +1,20 @@
 package com.intellij.xtext.samples.simple;
 
 
-import com.intellij.lang.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.ParserDefinition;
+import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.*;
-import com.intellij.psi.tree.*;
-import com.intellij.xtext.samples.simple.psi.SimpleFile;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.TokenType;
+import com.intellij.psi.tree.IFileElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.intellij.xtext.samples.simple.parser.SimpleParser;
-import com.intellij.xtext.samples.simple.psi.*;
+import com.intellij.xtext.samples.simple.psi.SimpleFile;
+import com.intellij.xtext.samples.simple.psi.SimpleTypes;
 import org.jetbrains.annotations.NotNull;
 
 public class SimpleParserDefinition implements ParserDefinition {
@@ -17,8 +23,8 @@ public class SimpleParserDefinition implements ParserDefinition {
     public static final TokenSet KEYWORDS = TokenSet.create(
             SimpleTypes.KW_ENTITY,
             SimpleTypes.KW_ENTITY2,
-            SimpleTypes.KW_PROPERTY,
-            SimpleTypes.KW_PROPERTY2,
+            SimpleTypes.PROPERTY,
+            SimpleTypes.PROPERTY2,
             SimpleTypes.KW_TEST,
             SimpleTypes.EXTENDS);
 
