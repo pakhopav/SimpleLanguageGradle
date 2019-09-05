@@ -1,1 +1,2 @@
+property b : refer;
 property <caret>

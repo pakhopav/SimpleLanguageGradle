@@ -25,8 +25,8 @@ public class SimpleLanguageCompletionTest extends SimpleLanguageCompletionTestBa
     }
 
     public void testInEntityBody() {
-        checkHasCompletions("property", "property2");
-        checkDoesnotContain("entity", "entity2", "test");
+        checkHasCompletions("property", "property2", "entity", "entity2");
+        checkDoesnotContain("test", "extends", "extends2");
     }
 
     public void testAllResolvesAtStart() {

@@ -1,1 +1,2 @@
 entity <caret>
+property a : a ;

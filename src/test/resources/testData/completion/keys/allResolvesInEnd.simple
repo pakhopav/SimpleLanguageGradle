@@ -1,6 +1,8 @@
 entity a extends b {
-property prop : a
+property prop : a;
+entity ENT {}
 }
-property p : pr
-test c
+property p : pr;
+test c;
 <caret>
+property p : pr;

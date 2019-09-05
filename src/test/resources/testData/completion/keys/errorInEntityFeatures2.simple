@@ -1,0 +1,6 @@
+test T ;
+entity ent extends G {
+    entity 2 {
+    <caret>
+    }
+}

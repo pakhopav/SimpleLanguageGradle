@@ -1,6 +1,7 @@
+property en : a ;
 entity ent extends G {
     property a a;
-
+    <caret>
 }
-<caret>
+
 test a;

@@ -1,8 +1,8 @@
 entity a extends b {
-property prop : a
+property prop : a;
 }
-test c
+test c;
 <caret>
-test r
-property proper : v
+test r;
+property proper : v;
 entity l {}
